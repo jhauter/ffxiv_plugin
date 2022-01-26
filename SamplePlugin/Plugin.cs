@@ -8,9 +8,9 @@ namespace SamplePlugin
 {
     public sealed class Plugin : IDalamudPlugin
     {
-        public string Name => "Sample Plugin";
+        public string Name => "NameplateRecolor";
 
-        private const string commandName = "/pmycommand";
+        private const string commandName = "/pNrecolor";
 
         private DalamudPluginInterface PluginInterface { get; init; }
         private CommandManager CommandManager { get; init; }
@@ -28,13 +28,10 @@ namespace SamplePlugin
             this.Configuration.Initialize(this.PluginInterface);
 
             // you might normally want to embed resources and load them from the manifest stream
-            var imagePath = Path.Combine(PluginInterface.AssemblyLocation.Directory?.FullName!, "goat.png");
-            var goatImage = this.PluginInterface.UiBuilder.LoadImage(imagePath);
-            this.PluginUi = new PluginUI(this.Configuration, goatImage);
 
             this.CommandManager.AddHandler(commandName, new CommandInfo(OnCommand)
             {
-                HelpMessage = "A useful message to display in /xlhelp"
+                HelpMessage = "Every breath you take..."
             });
 
             this.PluginInterface.UiBuilder.Draw += DrawUI;
@@ -49,18 +46,17 @@ namespace SamplePlugin
 
         private void OnCommand(string command, string args)
         {
-            // in response to the slash command, just display our main ui
-            this.PluginUi.Visible = true;
+            //Do nothing yet
         }
 
         private void DrawUI()
         {
-            this.PluginUi.Draw();
+            //this.PluginUi.Draw();
         }
 
         private void DrawConfigUI()
         {
-            this.PluginUi.SettingsVisible = true;
+            //this.PluginUi.SettingsVisible = true;
         }
     }
 }
